@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PensamentoService } from '../pensamento.service';
 
@@ -20,16 +20,28 @@ export class CriarPensamentoComponent implements OnInit {
 
   ngOnInit(): void {
     this.formulario = this.formBuilder.group({ // formulario reativo
-      conteudo: ['Formulario reativo'],
-      autoria: ['Angular'],
-      modelo: ['modelo1']
+      conteudo: ['', Validators.compose([ // Validators.compose usado para adicionar varias validacoes
+        Validators.required,
+        Validators.pattern(/(.|\s)*\S(.|\s)*/),
+      ])],
+      autoria: ['', Validators.compose([
+        Validators.required,
+        Validators.minLength(3)
+      ])],
+      modelo: ['']
     })
   }
 
+  habilitarBotao(): string {
+    return this.formulario.valid ? 'botao' : 'botao__desabilitado'
+  }
+
   criarPensamento() {
-    this.service.criar(this.formulario.value).subscribe(() => {
-      this.router.navigate(['/listarPensamento'])
-    })
+    if(this.formulario.valid) {
+      this.service.criar(this.formulario.value).subscribe(() => {
+        this.router.navigate(['/listarPensamento'])
+      })
+    }
   }
 
   cancelarPensamento() {
