@@ -10,6 +10,7 @@ import { CriarPensamentoComponent } from './components/pensamentos/criar-pensame
 import { ListarPensamentoComponent } from './components/pensamentos/listar-pensamento/listar-pensamento.component';
 import { PensamentoComponent } from './components/pensamentos/pensamento/pensamento.component';
 import { RodapeComponent } from './components/rodape/rodape.component';
+import { ExcluirPensamentoComponent } from './components/pensamentos/excluir-pensamento/excluir-pensamento.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { RodapeComponent } from './components/rodape/rodape.component';
     CriarPensamentoComponent,
     ListarPensamentoComponent,
     PensamentoComponent,
+    ExcluirPensamentoComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule,  HttpClientModule],
   providers: [],
