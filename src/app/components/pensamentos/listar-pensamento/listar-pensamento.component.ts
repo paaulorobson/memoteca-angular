@@ -25,7 +25,7 @@ export class ListarPensamentoComponent implements OnInit {
     this.service.listar(++this.paginaAtual).subscribe(() => {
       this.listaPensamentos.push(...this.listaPensamentos);
       if(!this.listaPensamentos.length) {
-        this.haMaisPensamentos = false
+        this.haMaisPensamentos = false;
       }
     })
   }
