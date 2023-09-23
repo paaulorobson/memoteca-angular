@@ -11,27 +11,29 @@
       >
       <img src="/assets/imagens/lupa.png" alt="Lupa azul">
     </div>
-    <h2 class="ff-inter">Meu Mural</h2>
-    <button class="botao" routerLink="/criarPensamento">Adicionar pensamento</button>
+    <h2 class="ff-inter">{{ titulo }}</h2>
+    <div class="botoes">
+      <button class="botao" (click)="recarregarComponente()">Meu Mural</button>
+      <button class="botao" (click)="listarFavoritos()">Meus Favoritos</button>
+      <button routerLink="/criarPensamento" class="botao">Novo pensamento</button>
+    </div>
   </header>
-
-  <div class="mural" *ngIf="possuiPensamento() else semPensamentos"> <!--ngIf recebe a condicao e else renderiza o template -->
+  <div class="mural" *ngIf="listaPensamentos.length > 0, else semPensamentos">
     <div *ngFor="let pensamento of listaPensamentos">
-      <app-pensamento [pensamento]="pensamento"></app-pensamento>
+      <app-pensamento
+        [pensamento]="pensamento"
+        [listaFavoritos]="listaFavoritos"
+      ></app-pensamento>
     </div>
   </div>
 </section>
-
 <app-botao-carregar-mais
   [haMaisPensamentos]="haMaisPensamentos"
-  (click)="carregarMaisPensamentos()"
->
+  (click)="carregarMaisPensamentos()">
 </app-botao-carregar-mais>
-
-<ng-template #semPensamentos> <!-- #semPensamentos é o nome do template -->
+<ng-template #semPensamentos>
   <div class="ff-inter sem-pensamentos">
-    <p>Ainda nao ha pensamentos cadastrados</p>
+    <p>Ainda não há pensamentos cadastrados!</p>
   </div>
 </ng-template>
-
 
